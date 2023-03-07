@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'customers',
+    'namespace' => 'Customers'
+], function () {
+
+    Route::get('/filter', [CustomersController::class, 'filter'])->name('api.customers.filter');
+
+    Route::post('/store', [CustomersController::class, 'store'])->name('api.customers.store');
+
+    Route::delete('/{customer_id}/destroy', [CustomersController::class, 'destroy'])->name('api.customers.destroy');
 });
