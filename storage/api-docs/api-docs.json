@@ -1,0 +1,367 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "RD API = Documentação",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/app": {},
+        "/api/customers/{customer_id}/destroy": {
+            "delete": {
+                "tags": [
+                    "Customers"
+                ],
+                "description": "Delete customers by its id.",
+                "operationId": "deleteCustomers",
+                "parameters": [
+                    {
+                        "name": "customer_id",
+                        "in": "path",
+                        "description": "Customer'a id",
+                        "schema": {
+                            "type": "integet",
+                            "example": "34"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the message of customer deleted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DestroyCustomersResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiHttpResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/customers/filter": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "description": "List, Filter and paginate customers.",
+                "operationId": "filterCustomers",
+                "parameters": [
+                    {
+                        "name": "full_name",
+                        "in": "query",
+                        "description": "Customers' full name",
+                        "schema": {
+                            "type": "string",
+                            "example": "Jorge Fernando"
+                        }
+                    },
+                    {
+                        "name": "cpf",
+                        "in": "query",
+                        "description": "Customers' cpf",
+                        "schema": {
+                            "type": "string",
+                            "example": "345.543.544-45"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Number of the page",
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "schema": {
+                            "type": "integer",
+                            "example": "5"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the list of filtered and paginated customers.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FilterCustomersResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiHttpResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/customers/store": {
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "description": "Store a new customer.",
+                "operationId": "storeCustomers",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application\\json": {
+                            "schema": {
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Jorge Fernando Campos Camargos"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "654.654.334-65"
+                                    },
+                                    "birthday": {
+                                        "type": "string",
+                                        "format": "y-m-d",
+                                        "example": "2000-12-21"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "(38) 98861-3232"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns the new stored customer.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StoreCustomersResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiHttpResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ApiHttpResource": {
+                "title": "Status Code Resource",
+                "description": "Response for status code return API",
+                "type": "object",
+                "oneOf": [
+                    {
+                        "schema": "HTTP Return",
+                        "title": "HTTP Return",
+                        "required": [
+                            "message"
+                        ],
+                        "properties": {
+                            "message": {
+                                "description": "Returned messages",
+                                "type": "array",
+                                "format": "array",
+                                "items": {},
+                                "example": [
+                                    "Error message"
+                                ]
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "DestroyCustomersResource": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "message": {
+                                "type": "string",
+                                "format": "string",
+                                "example": "Cliente com o id 34 excluido com sucesso."
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "FilterCustomersResource": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "format": "array",
+                                "items": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "1"
+                                        },
+                                        "full_name": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Jorge Fernando Camargos"
+                                        },
+                                        "cpf": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "769.346.343-67"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "(38) 98861-3263"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2023-03-07T17:48:20.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "pagination": {
+                                "properties": {
+                                    "per_page": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "5"
+                                    },
+                                    "page": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "1"
+                                    },
+                                    "rows": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "5"
+                                    },
+                                    "total": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "20"
+                                    }
+                                },
+                                "type": "object",
+                                "format": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "StoreCustomersResource": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "message": {
+                                "type": "string",
+                                "format": "string",
+                                "example": "Cliente cadastrado com sucesso."
+                            },
+                            "data": {
+                                "type": "array",
+                                "format": "array",
+                                "items": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "integer",
+                                            "example": "1"
+                                        },
+                                        "full_name": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Jorge Fernando Camargos"
+                                        },
+                                        "cpf": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "769.346.343-67"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "(38) 98861-3263"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2023-03-07T17:48:20.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Customers",
+            "description": "Endpoints for management of customers."
+        },
+        {
+            "name": "Customers",
+            "description": "Endpoints for management of customers."
+        },
+        {
+            "name": "Customers",
+            "description": "Endpoints for management of customers."
+        }
+    ]
+}

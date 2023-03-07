@@ -4,6 +4,22 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Schema(
+ *     schema="DestroyCustomersResource",
+ *     type="object",
+ *     allOf={
+ *     @OA\Schema(
+ *         @OA\Property(
+ *             property="message",
+ *             type="string",
+ *             format="string",
+ *             example="Cliente com o id 34 excluido com sucesso.",
+ *         ),
+ *      ),
+ *   }
+ * )
+ */
 class DestroyCustomersResource extends BaseResource
 {
     private int $customer_id;

@@ -10,6 +10,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Throwable;
 
+/**
+ * @OA\Info(title="RD API = Documentação", version="1.0.0"),
+ * @OA\PathItem(
+ *      path="/app"
+ *  ),
+ */
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests, DispatchesJobs;
