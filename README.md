@@ -1,1 +1,3 @@
-# rd_api
+# RD API
+
+Api de avaliação para adimissão
