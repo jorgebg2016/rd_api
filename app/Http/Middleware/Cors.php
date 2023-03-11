@@ -17,15 +17,10 @@ class Cors
     {
         header("Access-Control-Allow-Origin: *");
 
-        $headers = [
-            'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, DELETE',
-            'Access-Control-Allow-Headers'=> 'Content-Type, X-Auth-Token, Origin'
-        ];
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE");
 
-        $response = $next($request);
+        header("Access-Control-Allow-Headers: Content-Type");
 
-        foreach($headers as $key => $value) $response->header($key, $value);
-
-        return $response;
+        return $next($request);
     }
 }
