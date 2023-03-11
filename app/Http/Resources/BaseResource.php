@@ -22,7 +22,7 @@ class BaseResource extends JsonResource
 
             return parent::newCollection([
                 'data' => parent::collection($resource->items()),
-                'pagination' => $additional
+                'pagination' => $additional['data']['pagination']
             ]);
         }
 
