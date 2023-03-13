@@ -29,7 +29,7 @@ class CustomerRepository
 
         if ($cpf) $query->where('cpf', 'LIKE', '%'.$cpf.'%');
 
-        $query->orderBy('created_at', 'asc');
+        $query->orderBy('created_at', 'desc');
 
         if ($page && $perPage) return $query->paginate(page: $page, perPage: $perPage);
 
