@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['POST, GET, OPTIONS, DELETE'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [],
 
     'allowed_origins_patterns' => [],
 
