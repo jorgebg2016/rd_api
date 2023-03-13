@@ -17,18 +17,18 @@ return [
 
     'paths' => ['*'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['POST, GET, OPTIONS, DELETE'],
 
     'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['Content-Type'],
 
-    'exposed_headers' => ['*'],
+    'exposed_headers' => ['Content-Type'],
 
     'max_age' => 0,
 
-    'supports_credentials' => true,
+    'supports_credentials' => false,
 
 ];
