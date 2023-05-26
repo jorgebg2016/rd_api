@@ -1,6 +1,6 @@
 # RD API
 
-Api de avaliação para adimissão
+Api de teste
 
 1. Execute `composer install` para instalar as dependencias da aplicação (Instale as extensões do php, caso necessário).
 
